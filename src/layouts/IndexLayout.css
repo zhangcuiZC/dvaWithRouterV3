@@ -1,0 +1,40 @@
+.layout {
+  height: 100%;
+  background-color: #fff;
+}
+.header {
+  background-color: #ccc;
+  height: 40px;
+  padding: 0;
+}
+.content {
+  padding: 10px;
+  /* border-top: 1px solid #eee; */
+  background-color: #fff;
+}
+.user {
+  height: 40px;
+}
+.user span {
+  color: #fff;
+  text-shadow: 0px 0px 1px #666;
+  float: right;
+  line-height: 40px;
+  margin-right: 10px;
+}
+.logo {
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #fff;
+  margin-left: 10px;
+  text-shadow: 0px 0px 1px #666;
+}
+.logo img {
+  width: 80px;
+  height: 32px;
+  float: left;
+  margin-top: 4px;
+  background-color: #fff;
+  margin-right: 10px;
+}
