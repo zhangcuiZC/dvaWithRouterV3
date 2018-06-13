@@ -1,4 +1,4 @@
-import fetch from 'dva/fetch';
+import fetch from "dva/fetch";
 
 function parseJSON(response) {
   return response.json();
@@ -22,60 +22,66 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
-  let
-    params = {
-      credentials: 'include'
+  let params = {
+      credentials: "include"
     },
-    method = options.method || 'get',
+    method = options.method || "get",
     data = options.data || {};
   switch (method) {
-
-    case 'get':
-    case 'GET':
-      url += (data ? `?${formDataCode(data)}` : '');
+    case "get":
+    case "GET":
+      url += data ? `?${formDataCode(data)}` : "";
       break;
-    case 'put':
-    case 'PUT':
-      if (data.type === 'json') {
-        params.headers = { 'Content-Type': 'application/json; charset=UTF-8;' };
+    case "put":
+    case "PUT":
+      if (data.type === "json") {
+        params.headers = { "Content-Type": "application/json; charset=UTF-8;" };
         delete data.type;
         params.body = JSON.stringify(data);
-      }else {
-        params.headers = { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' };
+      } else {
+        params.headers = {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8;"
+        };
         params.body = formDataCode(data);
       }
-      params.method = 'PUT';
+      params.method = "PUT";
       break;
-    case 'post':
-    case 'POST':
-      if (data.type === 'json') {
-        params.headers = { 'Content-Type': 'application/json; charset=UTF-8;' };
+    case "post":
+    case "POST":
+      if (data.type === "json") {
+        params.headers = { "Content-Type": "application/json; charset=UTF-8;" };
         delete data.type;
         params.body = JSON.stringify(data);
-      }else {
-        params.headers = { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;' };
+      } else {
+        params.headers = {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8;"
+        };
         params.body = formDataCode(data);
       }
-      params.method = 'POST';
+      params.method = "POST";
       break;
-    case 'delete':
-    case 'DELETE':
-      url += (data ? `?${formDataCode(data)}` : '');
-      params.method = 'DELETE';
+    case "delete":
+    case "DELETE":
+      url += data ? `?${formDataCode(data)}` : "";
+      params.method = "DELETE";
       break;
   }
-  return fetch(`/api${url}`, params).then(checkStatus).then(parseJSON).then(data => ({ data })).catch(err => ({ err }));
+  return fetch(`/api${url}`, params)
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(data => ({ data }))
+    .catch(err => ({ err }));
 }
 
 /**
  * 创建修改参数格式的方法，改成提交的Form Data格式
  */
 function formDataCode(data) {
-  let str = '';
+  let str = "";
   for (const i in data) {
     if (data.hasOwnProperty(i)) {
       str = `${str + i}=${data[i]}&`;
     }
   }
-  return str ? str.substring(0, str.length - 1) : '';
+  return str ? str.substring(0, str.length - 1) : "";
 }
